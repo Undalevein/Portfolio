@@ -1,0 +1,9 @@
+div.project-container {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  gap: 20px;
+}
+div.project-container > section {
+  flex: 1 1 350px;
+}
