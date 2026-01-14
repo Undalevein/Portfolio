@@ -62,6 +62,7 @@ section {
 address {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-evenly;
   margin: 0;
   padding: 20px;
@@ -137,8 +138,8 @@ button {
   margin: 0px;
 }
 
-a:visited {
-  color: blueviolet;
+a {
+  cursor: pointer;
 }
 a.mail-button {
   height: 60px;
@@ -148,7 +149,7 @@ div.mail-link {
   height: 60px;
   width: 60px;
   background-color: transparent;
-  background-image: url("../anim/mail-button/MailButton-Sheet.png");
+  background-image: url("../anim/MailButton-Sheet.png");
   background-size: 600px 60px;
   border: none;
 
@@ -176,4 +177,37 @@ div.mail-link:hover {
 @keyframes close-mail {
   from {background-position: 0 0;}
   to   {background-position: -540px 0;}
+}
+div.resume-link {
+  height: 60px;
+  width: 60px;
+  background-color: transparent;
+  background-image: url("../anim/ResumeButton-Sheet.png");
+  background-size: 420px 60px;
+  border: none;
+
+  animation-name: fold-paper;
+  animation-duration: 0.3s;
+  animation-timing-function: steps(6);
+  animation-delay: 0;
+  animation-iteration-count: 1;
+  animation-direction: reverse;
+  animation-fill-mode: reverse;
+}
+div.resume-link:hover {
+  animation-name: unfold-paper;
+  animation-duration: 0.3s;
+  animation-timing-function: steps(6);
+  animation-delay: 0;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+@keyframes fold-paper {
+  from {background-position: 0 0;}
+  to   {background-position: -360px 0;}
+}
+@keyframes unfold-paper {
+  from {background-position: 0 0;}
+  to   {background-position: -360px 0;}
 }
