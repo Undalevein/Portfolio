@@ -9,7 +9,7 @@
 
 
 footer {
-  margin: 10px;
+  margin: 10px auto;
   border-radius: 30px;
   background-color: lightgreen;
 }
@@ -17,8 +17,10 @@ footer {
 
 body {
   background-color: lightcoral;
-  margin: auto 10%;
+  /*margin: auto 10%;*/
   width: fit-content;
+  margin: 0;
+
 }
 hgroup {
   padding: 10px 40px 10px;
@@ -189,7 +191,7 @@ div.resume-link {
   animation-name: fold-paper;
   animation-duration: 0.3s;
   animation-timing-function: steps(6);
-  animation-delay: 0;
+  animation-delay: 0s;
   animation-iteration-count: 1;
   animation-direction: reverse;
   animation-fill-mode: reverse;
@@ -198,7 +200,7 @@ div.resume-link:hover {
   animation-name: unfold-paper;
   animation-duration: 0.3s;
   animation-timing-function: steps(6);
-  animation-delay: 0;
+  animation-delay: 0s;
   animation-iteration-count: 1;
   animation-direction: normal;
   animation-fill-mode: forwards;
@@ -210,4 +212,8 @@ div.resume-link:hover {
 @keyframes unfold-paper {
   from {background-position: 0 0;}
   to   {background-position: -360px 0;}
+}
+
+div.body-container {
+  margin: auto 10% ;
 }

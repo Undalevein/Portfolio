@@ -1,3 +1,17 @@
+header {
+  background-color: lightsalmon;
+  width: 100%;
+  border-bottom: 5px groove chocolate;
+  margin-bottom: 1em;
+}
+
+body {
+  background-image: url("../img/Background_3.svg");
+  background-repeat: repeat;
+  background-size: 128px;
+
+}
+
 div.project-container {
   display: flex;
   justify-content: center;
