@@ -6,11 +6,12 @@ def print_rect(x, y, width, height, fill, opacity)
 end
 
 stdin = ARGV
-unless stdin.length == 1 || stdin.length == 2
-    raise ArgumentError, "How to run: ruby svg_compressor.rb <input svg file> <output svg file>"
+unless stdin.length >= 1 && stdin.length <= 3
+    raise ArgumentError, "How to run: ruby svg_compressor.rb <input svg file> <output svg file> <transparent>."
 end
 input = File.open(stdin[0])
 output = File.new(stdin.length == 2 ? stdin[1] : 'out.svg', 'wb:UTF-8')
+transparent = stdin[2] == "transparent"
 
 # Waste a line
 output.write(input.readline)
@@ -29,10 +30,19 @@ curr_opacity = -1
 curr_width = -1
 curr_x = -1
 curr_y = -1
+prev_x = 0
 
 while !input.eof?
     line = input.readline.split(/[" =]/).reject { |s| s.empty? }
     unless line.include?("<rect")
+        canvas.append({
+            :x => curr_x,
+            :y => curr_y,
+            :width => curr_width,
+            :height => 1,
+            :color => curr_color,
+            :opacity => curr_opacity
+        })
         next
     end
     color = line[line.index("fill") + 1]
@@ -52,7 +62,7 @@ while !input.eof?
         curr_y = y
         next
     end
-    if curr_color != color || curr_y != y
+    if curr_color != color || curr_y != y || prev_x + 1 != x || x == width - 1
         canvas.append({
             :x => curr_x,
             :y => curr_y,
@@ -68,15 +78,18 @@ while !input.eof?
         curr_y = y
     end
     curr_width += 1
+    prev_x = x
 end
 
 # Write the max
 p color_freq
 frequent_color = color_freq.max_by { |k, v| v } [0]
-output.write(print_rect(0, 0, width, height, frequent_color[0], frequent_color[1]))
+unless transparent
+    output.write(print_rect(0, 0, width, height, frequent_color[0], frequent_color[1]))
+end
 
 for step in canvas
-    if step[:color] == frequent_color[0] && step[:opacity] == frequent_color[1]
+    if !transparent && step[:color] == frequent_color[0] && step[:opacity] == frequent_color[1]
         next
     end
     output.write(print_rect(step[:x], step[:y], step[:width], 1, step[:color], step[:opacity]))
